@@ -1,34 +1,45 @@
 <core:FragmentDefinition
-	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns="sap.uxap"
 	xmlns:m="sap.m"
+	xmlns:plugins="sap.m.plugins"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+	xmlns:dnd="sap.ui.core.dnd"
     xmlns:form="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
-<form:SimpleForm editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="5">
-								<m:Label text="{/#TravelType/TravelID/@sap:label}"/>
-								<m:Text text="{TravelID}"/>
+	<ObjectPageSection id="_IDGenObjectPageSection" titleUppercase="false" title="Travel">
+                <subSections>
+                    <ObjectPageSubSection id="travelDetailSubSection" titleUppercase="false">
+                        <blocks>
+<form:SimpleForm id="_IDGenSimpleForm1" editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="5">
+								<m:Label id="_IDGenLabel9" text="{/#TravelType/TravelID/@sap:label}"/>
+								<m:Text id="_IDGenText19" text="{TravelID}"/>
 
-								<m:Label text="{/#TravelType/AgencyID/@sap:label}"/>
-								<m:Text text="{AgencyName} ({AgencyID})"/>
+								<m:Label id="_IDGenLabel10" text="{/#TravelType/AgencyID/@sap:label}"/>
+								<m:Text id="_IDGenText20" text="{AgencyName} ({AgencyID})"/>
 
-								<m:Label text="{/#TravelType/CustomerID/@sap:label}"/>
-								<m:Text text="{CustomerName} ({CustomerID})"/>
+								<m:Label id="_IDGenLabel11" text="{/#TravelType/CustomerID/@sap:label}"/>
+								<m:Text id="_IDGenText21" text="{CustomerName} ({CustomerID})"/>
 
-								<m:Label text="{/#TravelType/BeginDate/@sap:label}"/>
-								<m:Text text="{ path: 'BeginDate', type: 'sap.ui.model.type.Date'}"/>
+								<m:Label id="_IDGenLabel12" text="{/#TravelType/BeginDate/@sap:label}"/>
+								<m:Text id="_IDGenText22" text="{ path: 'BeginDate', type: 'sap.ui.model.type.Date'}"/>
 
-								<m:Label text="{/#TravelType/EndDate/@sap:label}"/>
-								<m:Text text="{ path: 'EndDate', type: 'sap.ui.model.type.Date'}"/>
+								<m:Label id="_IDGenLabel13" text="{/#TravelType/EndDate/@sap:label}"/>
+								<m:Text id="_IDGenText23" text="{ path: 'EndDate', type: 'sap.ui.model.type.Date'}"/>
 
-								<m:Label text="{/#TravelType/BookingFee/@sap:label}"/>
-								<m:Text text="{ path: 'BookingFee', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } } {CurrencyCode}" />
+								<m:Label id="_IDGenLabel14" text="{/#TravelType/BookingFee/@sap:label}"/>
+								<m:Text id="_IDGenText24" text="{ path: 'BookingFee', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } } {CurrencyCode}" />
 
-								<m:Label text="{/#TravelType/TotalPrice/@sap:label}"/>
-								<m:Text text="{ path: 'TotalPrice', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } } {CurrencyCode}" />
+								<m:Label id="_IDGenLabel15" text="{/#TravelType/TotalPrice/@sap:label}"/>
+								<m:Text id="_IDGenText25" text="{ path: 'TotalPrice', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } } {CurrencyCode}" />
 
-								<m:Label text="{/#TravelType/OverallStatus/@sap:label}"/>
-								<m:Text text="{OverallStatusText}"/>
+								<m:Label id="_IDGenLabel16" text="{/#TravelType/OverallStatus/@sap:label}"/>
+								<m:Text id="_IDGenText26" text="{OverallStatusText}"/>
 
-								<m:Label text="{/#TravelType/Description/@sap:label}"/>
-								<m:Text text="{Description}"/>
+								<m:Label id="_IDGenLabel17" text="{/#TravelType/Description/@sap:label}"/>
+								<m:Text id="_IDGenText27" text="{Description}"/>
 							</form:SimpleForm>
-                            </core:FragmentDefinition>
+							</blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
+</core:FragmentDefinition>						

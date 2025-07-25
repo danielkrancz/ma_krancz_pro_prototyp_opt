@@ -1,0 +1,72 @@
+<core:FragmentDefinition
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+    xmlns:plugins="sap.m.plugins"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+	xmlns:dnd="sap.ui.core.dnd"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <ObjectPageSection id="_IDGenObjectPageSection3" titleUppercase="false" title="Booking Supplement">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection3" titleUppercase="false">
+                        <blocks>
+                            <m:Table id="bookingSupplementTable" items="{ path: 'to_BookSupplement', sorter: [ { path: 'BookingSupplementID' } ] }" growingScrollToLoad="true" fixedLayout="Strict" growing="true" sticky="ColumnHeaders,HeaderToolbar">
+								<m:dependents>
+									<plugins:ColumnResizer id="_IDGenColumnResizer2" columnResize="onColumnResize"/>
+									<columnmenu:Menu id="menu" beforeOpen="beforeOpenColumnMenu">
+										<columnmenu:QuickSort id="_IDGenQuickSort2" change="onSort">
+											<columnmenu:items>
+												<columnmenu:QuickSortItem id="_IDGenQuickSortItem2"></columnmenu:QuickSortItem>
+											</columnmenu:items>
+										</columnmenu:QuickSort>
+										<columnmenu:QuickGroup id="_IDGenQuickGroup2" change="onGroup">
+											<columnmenu:items>
+												<columnmenu:QuickGroupItem id="_IDGenQuickGroupItem2"></columnmenu:QuickGroupItem>
+											</columnmenu:items>
+										</columnmenu:QuickGroup>
+									</columnmenu:Menu>
+								</m:dependents>
+
+								<m:dragDropConfig>
+									<dnd:DragDropInfo id="_IDGenDragDropInfo2" sourceAggregation="columns" targetAggregation="columns" dropPosition="Between" drop="onColumnMove"/>
+								</m:dragDropConfig>
+
+								<m:headerToolbar>
+									<m:OverflowToolbar id="_IDGenOverflowToolbar3">
+										<m:Title id="_IDGenTitle4" text="Booking Supplements"/>
+										<m:ToolbarSpacer id="_IDGenToolbarSpacer4"/>
+										<m:SearchField id="_IDGenSearchField" width="15em" change="onSearchChanged"/>
+										<m:Button id="_IDGenButton8" icon="sap-icon://action-settings" press="openPersoDialog"/>
+										<m:Button id="_IDGenButton9" icon="sap-icon://excel-attachment" press="onExport"/>
+									</m:OverflowToolbar>
+								</m:headerToolbar>
+								<m:columns>
+									<m:Column id="bookingsupplementid" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText51" text="{/#BookingSupplementType/BookingSupplementID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="SupplementID" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText52" text="{/#BookingSupplementType/SupplementID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="price" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText53" text="{/#BookingSupplementType/Price/@sap:label}"/>
+									</m:Column>
+
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem id="_IDGenColumnListItem2">
+										<m:Text id="_IDGenText54" text="{BookingSupplementID}"/>
+										<m:Text id="_IDGenText55" text="{SupplementDescription} ({SupplementID})"/>
+                                        <m:HBox id="_IDGenHBox">
+                                            <m:Text id="_IDGenText56" text="{Price}" class="sapUiTinyMarginEnd"/>
+                                            <m:Text id="_IDGenText57" text="{CurrencyCode}"/>
+                                        </m:HBox>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
+</core:FragmentDefinition>

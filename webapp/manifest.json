@@ -52,6 +52,7 @@
   },
   "sap.ui": {
     "technology": "UI5",
+    "fullWidth": true,
     "icons": {
       "icon": "",
       "favIcon": "",
@@ -89,7 +90,9 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        }
       }
     },
     "resources": {
@@ -118,12 +121,34 @@
           "target": [
             "TargetMain"
           ]
+        },
+        {
+          "name": "Detail",
+          "pattern": "Travel({TravelID})",
+          "target": [
+            "TargetDetail"
+          ]
+        },
+        {
+          "name": "BookingDetail",
+          "pattern": "Travel({TravelID})/Booking({BookingID})",
+          "target": [
+            "TargetBookingDetail"
+          ]
         }
       ],
       "targets": {
         "TargetMain": {
           "id": "Main",
           "name": "Main"
+        },
+        "TargetDetail": {
+          "id": "Detail",
+          "name": "Detail"
+        },
+        "TargetBookingDetail": {
+          "id": "BookingDetail",
+          "name": "BookingDetail"
         }
       }
     },

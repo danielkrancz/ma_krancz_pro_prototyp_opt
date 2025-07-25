@@ -1,6 +1,133 @@
 <mvc:View controllerName="at.hb.makrancz.procodeappopt.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:plugins="sap.m.plugins"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+	xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-    </Page>
+    <f:DynamicPage id="_IDGenDynamicPage" preserveHeaderStateOnScroll="true" fitContent="true">
+			<f:title>
+				<f:DynamicPageTitle id="_IDGenDynamicPageTitle">
+					<f:heading>
+						<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" />
+					</f:heading>
+					<f:expandedContent>
+						<Label id="expandedLabel" text="No filters active" />
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label id="snappedLabel" text="No filters active" />
+					</f:snappedContent>
+				</f:DynamicPageTitle>
+			</f:title>
+			<f:header>
+				<f:DynamicPageHeader id="_IDGenDynamicPageHeader" pinnable="true">
+					<f:content>
+						<fb:FilterBar id="filterbar" basicSearch="basicSearch" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                            <fb:filterGroupItems>
+								<fb:FilterGroupItem id="_IDGenFilterGroupItem" name="AgencyID" label="{/#TravelType/AgencyID/@sap:label}" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<MultiInput id="inputAgencyFilter" showValueHelp="true" change=".onSelectionChange" valueHelpRequest=".showValueHelpDialog($event, 'Agency', true, true)" />
+									</fb:control>
+								</fb:FilterGroupItem>
+								<fb:FilterGroupItem id="_IDGenFilterGroupItem1" name="CustomerID" label="{/#TravelType/CustomerID/@sap:label}" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<MultiInput id="inputCustomerFilter" showValueHelp="true" change=".onSelectionChange" valueHelpRequest=".showValueHelpDialog($event, 'Customer', true, true)"/>
+									</fb:control>
+								</fb:FilterGroupItem>
+								<fb:FilterGroupItem id="_IDGenFilterGroupItem2" name="OverallStatus" label="{/#TravelType/OverallStatus/@sap:label}" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<MultiComboBox id="OverallStatus" name="OverallStatus" selectionChange=".onSelectionChange" items="{ path: '/OverallStatusVH', templateShareable: true }">
+											<core:Item id="_IDGenItem" key="{OverallStatus}" text="{OverallStatus_Text}"/>
+										</MultiComboBox>
+									</fb:control>
+								</fb:FilterGroupItem>
+							</fb:filterGroupItems>
+						</fb:FilterBar>
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+				<Table id="travelTable" items="{ path: '/Travel', suspended: true }" mode="SingleSelectLeft" growingScrollToLoad="true" fixedLayout="Strict" growing="true" sticky="ColumnHeaders,HeaderToolbar" selectionChange="onTableSelectionChanged">
+                    <dependents>
+                        <plugins:ColumnResizer id="_IDGenColumnResizer" columnResize="onColumnResize($event, 'travelTable')"/>
+                        <columnmenu:Menu id="_IDGenMenu" beforeOpen="beforeOpenColumnMenu($event, 'travelTable')">
+                            <columnmenu:QuickSort id="_IDGenQuickSort" change="onSort($event, 'travelTable')">
+                                <columnmenu:items>
+                                    <columnmenu:QuickSortItem id="_IDGenQuickSortItem"></columnmenu:QuickSortItem>
+                                </columnmenu:items>
+                            </columnmenu:QuickSort>
+                            <columnmenu:QuickGroup id="_IDGenQuickGroup" change="onGroup($event, 'travelTable')">
+                                <columnmenu:items>
+                                    <columnmenu:QuickGroupItem id="_IDGenQuickGroupItem"></columnmenu:QuickGroupItem>
+                                </columnmenu:items>
+                            </columnmenu:QuickGroup>
+                        </columnmenu:Menu>
+                    </dependents>
+
+                    <dragDropConfig>
+                        <dnd:DragDropInfo id="_IDGenDragDropInfo" sourceAggregation="columns" targetAggregation="columns" dropPosition="Between" drop="onColumnMove($event, 'travelTable')"/>
+                    </dragDropConfig>
+
+                    <headerToolbar>
+                        <OverflowToolbar id="_IDGenOverflowToolbar">
+                            <Title id="_IDGenTitle" text="Travels"/>
+                            <ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+                            <Button id="_IDGenButton1" text="Copy Travel" enabled="{ui>/itemSelected}" press="onCopyPressed"/>
+                            <Button id="_IDGenButton2" text="Create" press="onCreatePressed"/>
+                            <Button id="_IDGenButton3" text="Delete" enabled="{ui>/itemSelected}" press="onDeleteItem"/>
+                            <SegmentedButton id="_IDGenSegmentedButton" selectedKey="-" selectionChange="onPopinSelectionChanged">
+                                <items>
+                                    <SegmentedButtonItem id="_IDGenSegmentedButtonItem" icon="sap-icon://detail-more" key="X" />
+                                    <SegmentedButtonItem id="_IDGenSegmentedButtonItem1" icon="sap-icon://detail-less" key="-" />
+                                </items>
+                            </SegmentedButton>
+                            <Button id="_IDGenButton4" icon="sap-icon://action-settings" press="openPersoDialog($event, 'travelTable')"/>
+                            <Button id="_IDGenButton5" icon="sap-icon://excel-attachment" press="onExport($event, 'travelTable')"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column id="travelid" headerMenu="menu" demandPopin="{ui>/usePopin}" importance="High">
+                            <Text id="_IDGenText" text="{/#TravelType/TravelID/@sap:label}"/>
+                        </Column>
+                        <Column id="agencyid" headerMenu="menu" demandPopin="{ui>/usePopin}" importance="High">
+                            <Text id="_IDGenText1" text="{/#TravelType/AgencyID/@sap:label}"/>
+                        </Column>
+                        <Column id="customerid" headerMenu="menu" demandPopin="{ui>/usePopin}" importance="High">
+                            <Text id="_IDGenText2" text="{/#TravelType/CustomerID/@sap:label}"/>
+                        </Column>
+                        <Column id="begindate" headerMenu="menu" demandPopin="{ui>/usePopin}" importance="Medium" minScreenWidth="Tablet">
+                            <Text id="_IDGenText3" text="{/#TravelType/BeginDate/@sap:label}"/>
+                        </Column>
+                        <Column id="enddate" headerMenu="menu" demandPopin="{ui>/usePopin}" importance="Medium" minScreenWidth="Tablet">
+                            <Text id="_IDGenText4" text="{/#TravelType/EndDate/@sap:label}"/>
+                        </Column>
+                        <Column id="status" headerMenu="menu" demandPopin="{ui>/usePopin}" importance="Low" minScreenWidth="Desktop">
+                            <Text id="_IDGenText5" text="{/#TravelType/OverallStatusText/@sap:label}"/>
+                        </Column>
+
+                        <Column id="totalprice" headerMenu="menu" demandPopin="{ui>/usePopin}" importance="Low" minScreenWidth="Desktop">
+                            <Text id="_IDGenText6" text="{/#TravelType/TotalPrice/@sap:label}"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="_IDGenColumnListItem" type="Navigation" press="onListItemPressed">
+                            <Text id="_IDGenText7" text="{TravelID}"/>
+                            <Text id="_IDGenText8" text="{AgencyName} ({AgencyID})"/>
+                            <Text id="_IDGenText9" text="{CustomerName} ({CustomerID})"/>
+                            <Text id="_IDGenText10" text="{ path: 'BeginDate', type: 'sap.ui.model.odata.type.Date' }"/>
+                            <Text id="_IDGenText11" text="{ path: 'EndDate', type: 'sap.ui.model.odata.type.Date' }"/>
+                            <Text id="_IDGenText12" text="{OverallStatusText}"/>
+                            <FlexBox id="_IDGenFlexBox" alignItems="Stretch" alignContent="Stretch" wrap="Wrap" justifyContent="End">
+                                <Text id="_IDGenText13" text="{ path: 'TotalPrice', type: 'sap.ui.model.odata.type.Decimal' }" />
+                                <Text id="_IDGenText14" text="{CurrencyCode}"/>
+                            </FlexBox>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+			</f:content>
+		</f:DynamicPage>
 </mvc:View>

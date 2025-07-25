@@ -3,137 +3,33 @@
 		   xmlns:layout="sap.ui.layout"
 		   xmlns:form="sap.ui.layout.form"
 		   xmlns:m="sap.m"
-		   xmlns:plugins="sap.m.plugins"
-    	   xmlns:columnmenu="sap.m.table.columnmenu"
-		   xmlns:dnd="sap.ui.core.dnd"
-		   controllerName="at.hb.makrancz.procodeapp.controller.Detail"
+		   controllerName="at.hb.makrancz.procodeappopt.controller.Detail"
 		   height="100%">
 	<ObjectPageLayout id="ObjectPageLayout" showFooter="{= ${ui>/createMode} || ${ui>/editMode} }"
 		showTitleInHeaderContent="true">
 		<headerTitle>
-			<ObjectPageDynamicHeaderTitle>
+			<ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
 				<expandedHeading>
-					<m:Title text="{= ${ui>/createMode} ? 'Unnamed Object' : ${TravelID} }" wrapping="true"/>
+					<m:Title id="_IDGenTitle1" text="{= ${ui>/createMode} ? 'Unnamed Object' : ${TravelID} }" wrapping="true"/>
 				</expandedHeading>
 
 				<snappedHeading>
-					<m:FlexBox fitContainer="true" alignItems="Center">
-						<m:Title text="{= ${ui>/createMode} ? 'Unnamed Object' : ${TravelID} }" wrapping="true" />
+					<m:FlexBox id="_IDGenFlexBox1" fitContainer="true" alignItems="Center">
+						<m:Title id="_IDGenTitle2" text="{= ${ui>/createMode} ? 'Unnamed Object' : ${TravelID} }" wrapping="true" />
 					</m:FlexBox>
 				</snappedHeading>
 
 				<actions>
-					<m:Button text="Edit" type="Emphasized" press="onEdit" visible="{= !${ui>/createMode} &amp;&amp; !${ui>/editMode} }"/>
-					<m:Button type="Transparent" text="Delete" press="onDelete" visible="{= !${ui>/createMode} &amp;&amp; !${ui>/editMode} }"/>
+					<m:Button id="_IDGenButton6" text="Edit" type="Emphasized" press="onEdit" visible="{= !${ui>/createMode} &amp;&amp; !${ui>/editMode} }"/>
+					<m:Button id="_IDGenButton7" type="Transparent" text="Delete" press="onDelete" visible="{= !${ui>/createMode} &amp;&amp; !${ui>/editMode} }"/>
 				</actions>
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>
-
-		<sections>
-			<ObjectPageSection titleUppercase="false" title="Travel">
-                <subSections>
-                    <ObjectPageSubSection id="travelDetailSubSection" titleUppercase="false">
-                        <blocks>
-                            
-                        </blocks>
-                    </ObjectPageSubSection>
-                </subSections>
-			</ObjectPageSection>
-            <ObjectPageSection titleUppercase="false" title="Booking" visible="{= !${ui>/createMode}}">
-                <subSections>
-                    <ObjectPageSubSection titleUppercase="false">
-                        <blocks>
-                            <m:Table id="bookingTable" items="{to_Booking}" growingScrollToLoad="true" fixedLayout="Strict" growing="true" sticky="ColumnHeaders,HeaderToolbar">
-								<m:dependents>
-									<plugins:ColumnResizer columnResize="onColumnResize"/>
-									<columnmenu:Menu id="menu" beforeOpen="beforeOpenColumnMenu" showTableSettingsButton="true" tableSettingsPressed="openPersoDialog">
-										<columnmenu:QuickSort change="onSort">
-											<columnmenu:items>
-												<columnmenu:QuickSortItem></columnmenu:QuickSortItem>
-											</columnmenu:items>
-										</columnmenu:QuickSort>
-										<columnmenu:QuickGroup change="onGroup">
-											<columnmenu:items>
-												<columnmenu:QuickGroupItem></columnmenu:QuickGroupItem>
-											</columnmenu:items>
-										</columnmenu:QuickGroup>
-									</columnmenu:Menu>
-								</m:dependents>
-
-								<m:dragDropConfig>
-									<dnd:DragDropInfo sourceAggregation="columns" targetAggregation="columns" dropPosition="Between" drop="onColumnMove"/>
-								</m:dragDropConfig>
-
-								<m:noData>
-									<m:IllustratedMessage/>
-								</m:noData>
-								<m:headerToolbar>
-									<m:OverflowToolbar>
-										<m:Title text="Bookings"/>
-										<m:ToolbarSpacer/>
-										<m:SearchField width="15em"/>
-										<m:Button text="Create"/>
-										<m:Button icon="sap-icon://action-settings" press="openPersoDialog"/>
-										<m:Button icon="sap-icon://excel-attachment" press="onExport"/>
-									</m:OverflowToolbar>
-								</m:headerToolbar>
-								<m:columns>
-									<m:Column id="bookingnumber" headerMenu="menu" demandPopin="true" importance="High">
-										<m:Text text="{/#BookingType/BookingID/@sap:label}"/>
-									</m:Column>
-
-									<m:Column id="bookingdate" headerMenu="menu" demandPopin="true" importance="High">
-										<m:Text text="{/#BookingType/BookingDate/@sap:label}"/>
-									</m:Column>
-
-									<m:Column id="customerid" headerMenu="menu" demandPopin="true" importance="High">
-										<m:Text text="{/#BookingType/CustomerID/@sap:label}"/>
-									</m:Column>
-
-									<m:Column id="airlineid" headerMenu="menu" demandPopin="true" importance="High">
-										<m:Text text="{/#BookingType/CarrierID/@sap:label}"/>
-									</m:Column>
-
-									<m:Column id="flightnumber" headerMenu="menu" demandPopin="true" importance="High">
-										<m:Text text="{/#BookingType/ConnectionID/@sap:label}"/>
-									</m:Column>
-
-									<m:Column id="flightdate" headerMenu="menu" demandPopin="true" importance="High">
-										<m:Text text="{/#BookingType/FlightDate/@sap:label}"/>
-									</m:Column>
-
-									<m:Column id="flightprice" headerMenu="menu" demandPopin="true" importance="High">
-										<m:Text text="{/#BookingType/FlightPrice/@sap:label}"/>
-									</m:Column>
-
-									<m:Column id="status" headerMenu="menu" demandPopin="true" importance="High">
-										<m:Text text="{/#BookingType/BookingStatusText/@sap:label}"/>
-									</m:Column>
-									
-								</m:columns>
-								<m:items>
-									<m:ColumnListItem type="Navigation" press="onListItemPressed">
-										<m:Text text="{BookingID}"/>
-										<m:Text text="{ path: 'BookingDate', type: 'sap.ui.model.type.Date'}"/>
-										<m:Text text="{CustomerName} ({CustomerID})"/>
-										<m:Text text="{CarrierName} ({CarrierID})"/>
-										<m:Text text="{ConnectionID}"/>
-										<m:Text text="{ path: 'FlightDate', type: 'sap.ui.model.type.Date'}"/>
-										<m:Text text="{FlightPrice}"/>
-										<m:Text text="{BookingStatusText}"/>
-									</m:ColumnListItem>
-								</m:items>
-							</m:Table>
-                        </blocks>
-                    </ObjectPageSubSection>
-                </subSections>
-			</ObjectPageSection>
-		</sections>
 		<footer>
-			<m:OverflowToolbar>
-				<m:ToolbarSpacer/>
-				<m:Button text="Save" type="Emphasized" press="onSave" />
-				<m:Button text="Cancel" type="Transparent" press="onCancel"/>
+			<m:OverflowToolbar id="_IDGenOverflowToolbar2">
+				<m:ToolbarSpacer id="_IDGenToolbarSpacer3"/>
+				<m:Button id="_IDGenButton11" text="Save" type="Emphasized" press="onSave" />
+				<m:Button id="_IDGenButton12" text="Cancel" type="Transparent" press="onCancel"/>
 			</m:OverflowToolbar>
 		</footer>
 	</ObjectPageLayout>

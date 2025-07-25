@@ -1,0 +1,94 @@
+<core:FragmentDefinition
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:plugins="sap.m.plugins"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+	xmlns:dnd="sap.ui.core.dnd"
+    xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+            <ObjectPageSection id="_IDGenObjectPageSection1" titleUppercase="false" title="Booking" visible="{= !${ui>/createMode}}">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection" titleUppercase="false">
+                        <blocks>
+<m:Table id="bookingTable" items="{to_Booking}" growingScrollToLoad="true" fixedLayout="Strict" growing="true" sticky="ColumnHeaders,HeaderToolbar">
+								<m:dependents>
+									<plugins:ColumnResizer id="_IDGenColumnResizer1" columnResize="onColumnResize"/>
+									<columnmenu:Menu id="menu" beforeOpen="beforeOpenColumnMenu">
+										<columnmenu:QuickSort id="_IDGenQuickSort1" change="onSort">
+											<columnmenu:items>
+												<columnmenu:QuickSortItem id="_IDGenQuickSortItem1"></columnmenu:QuickSortItem>
+											</columnmenu:items>
+										</columnmenu:QuickSort>
+										<columnmenu:QuickGroup id="_IDGenQuickGroup1" change="onGroup">
+											<columnmenu:items>
+												<columnmenu:QuickGroupItem id="_IDGenQuickGroupItem1"></columnmenu:QuickGroupItem>
+											</columnmenu:items>
+										</columnmenu:QuickGroup>
+									</columnmenu:Menu>
+								</m:dependents>
+
+								<m:dragDropConfig>
+									<dnd:DragDropInfo id="_IDGenDragDropInfo1" sourceAggregation="columns" targetAggregation="columns" dropPosition="Between" drop="onColumnMove"/>
+								</m:dragDropConfig>
+
+								<m:headerToolbar>
+									<m:OverflowToolbar id="_IDGenOverflowToolbar1">
+										<m:Title id="_IDGenTitle3" text="Bookings"/>
+										<m:ToolbarSpacer id="_IDGenToolbarSpacer"/>
+										<m:SearchField width="15em" change="onSearchChanged"/>
+										<m:Button text="Create" press="onCreateBooking"/>
+										<m:Button icon="sap-icon://action-settings" press="openPersoDialog"/>
+										<m:Button icon="sap-icon://excel-attachment" press="onExport($event, 'bookingTable')"/>
+									</m:OverflowToolbar>
+								</m:headerToolbar>
+								<m:columns>
+									<m:Column id="bookingnumber" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText18" text="{/#BookingType/BookingID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="bookingdate" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText28" text="{/#BookingType/BookingDate/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="customerid" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText29" text="{/#BookingType/CustomerID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="airlineid" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText30" text="{/#BookingType/CarrierID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="flightnumber" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText31" text="{/#BookingType/ConnectionID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="flightdate" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText32" text="{/#BookingType/FlightDate/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="flightprice" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText33" text="{/#BookingType/FlightPrice/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="status" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text id="_IDGenText34" text="{/#BookingType/BookingStatusText/@sap:label}"/>
+									</m:Column>
+									
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem id="_IDGenColumnListItem1" type="Navigation" press="onListItemPressed">
+										<m:Text id="_IDGenText35" text="{BookingID}"/>
+										<m:Text id="_IDGenText36" text="{ path: 'BookingDate', type: 'sap.ui.model.type.Date'}"/>
+										<m:Text id="_IDGenText37" text="{CustomerName} ({CustomerID})"/>
+										<m:Text id="_IDGenText38" text="{CarrierName} ({CarrierID})"/>
+										<m:Text id="_IDGenText39" text="{ConnectionID}"/>
+										<m:Text id="_IDGenText40" text="{ path: 'FlightDate', type: 'sap.ui.model.type.Date'}"/>
+										<m:Text id="_IDGenText41" text="{FlightPrice} {Currency}"/>
+										<m:Text id="_IDGenText42" text="{BookingStatusText}"/>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table></blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
+</core:FragmentDefinition>						

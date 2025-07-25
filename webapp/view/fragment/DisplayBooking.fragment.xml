@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+<ObjectPageSection id="_IDGenObjectPageSection4" titleUppercase="false" title="Booking">
+                <subSections>
+                    <ObjectPageSubSection id="_IDGenObjectPageSubSection1" titleUppercase="false">
+                        <blocks>
+                            <form:SimpleForm id="_IDGenSimpleForm2" editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="5">
+								<m:Label id="_IDGenLabel18" text="{/#BookingType/BookingID/@sap:label}"/>
+								<m:Text id="_IDGenText43" text="{BookingID}"/>
+
+                                <m:Label id="_IDGenLabel19" text="{/#BookingType/BookingDate/@sap:label}"/>
+								<m:Text id="_IDGenText44" text="{ path: 'BookingDate', type: 'sap.ui.model.type.Date'}"/>
+
+                                <m:Label id="_IDGenLabel20" text="{/#BookingType/CustomerID/@sap:label}"/>
+								<m:Text id="_IDGenText45" text="{CustomerName} ({CustomerID})"/>
+
+								<m:Label id="_IDGenLabel21" text="{/#BookingType/CarrierID/@sap:label}"/>
+								<m:Text id="_IDGenText46" text="{CarrierName} ({CarrierID})"/>
+
+								<m:Label id="_IDGenLabel22" text="{/#BookingType/ConnectionID/@sap:label}"/>
+								<m:Text id="_IDGenText47" text="{ConnectionID}"/>
+
+								<m:Label id="_IDGenLabel23" text="{/#BookingType/FlightDate/@sap:label}"/>
+								<m:Text id="_IDGenText48" text="{ path: 'FlightDate', type: 'sap.ui.model.type.Date'}"/>
+
+								<m:Label id="_IDGenLabel24" text="{/#BookingType/FlightPrice/@sap:label}"/>
+								<m:Text id="_IDGenText49" text="{ path: 'FlightPrice', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } } {CurrencyCode}" />
+
+								<m:Label id="_IDGenLabel25" text="{/#BookingType/BookingStatus/@sap:label}"/>
+								<m:Text id="_IDGenText50" text="{BookingStatusText}"/>
+
+							</form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
+</core:FragmentDefinition>

@@ -1,0 +1,72 @@
+<core:FragmentDefinition
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:plugins="sap.m.plugins"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+	xmlns:dnd="sap.ui.core.dnd"
+    xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+<ObjectPageSection titleUppercase="false" title="Booking Supplement">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <m:Table id="4bookingSupplementTable" items="{ path: 'to_BookSupplement', sorter: [ { path: 'BookingSupplementID' } ] }" growingScrollToLoad="true" fixedLayout="Strict" growing="true" sticky="ColumnHeaders,HeaderToolbar">
+								<m:dependents>
+									<plugins:ColumnResizer columnResize="onColumnResize"/>
+									<columnmenu:Menu id="4menu" beforeOpen="beforeOpenColumnMenu" >
+										<columnmenu:QuickSort change="onSort">
+											<columnmenu:items>
+												<columnmenu:QuickSortItem></columnmenu:QuickSortItem>
+											</columnmenu:items>
+										</columnmenu:QuickSort>
+										<columnmenu:QuickGroup change="onGroup">
+											<columnmenu:items>
+												<columnmenu:QuickGroupItem></columnmenu:QuickGroupItem>
+											</columnmenu:items>
+										</columnmenu:QuickGroup>
+									</columnmenu:Menu>
+								</m:dependents>
+
+								<m:dragDropConfig>
+									<dnd:DragDropInfo sourceAggregation="columns" targetAggregation="columns" dropPosition="Between" drop="onColumnMove"/>
+								</m:dragDropConfig>
+
+								<m:headerToolbar>
+									<m:OverflowToolbar>
+										<m:Title text="Booking Supplements"/>
+										<m:ToolbarSpacer/>
+										<m:SearchField width="15em" change="onSearchChanged"/>
+										<m:Button icon="sap-icon://action-settings" press="openPersoDialog"/>
+										<m:Button icon="sap-icon://excel-attachment" press="onExport"/>
+									</m:OverflowToolbar>
+								</m:headerToolbar>
+								<m:columns>
+									<m:Column id="4bookingsupplementid" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingSupplementType/BookingSupplementID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="4SupplementID" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingSupplementType/SupplementID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="4price" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingSupplementType/Price/@sap:label}"/>
+									</m:Column>
+
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem>
+										<m:Text text="{BookingSupplementID}"/>
+										<m:Input value="{SupplementID}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Product', false, false)"/>
+                                        <m:HBox>
+                                            <m:Input value="{Price}" class="sapUiTinyMarginEnd"/>
+                                            <m:Input value="{CurrencyCode}" valueHelpRequest=".showValueHelpDialog($event, 'Currency', false, false)" showValueHelp="true"/>
+                                        </m:HBox>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
+            </core:FragmentDefinition>		

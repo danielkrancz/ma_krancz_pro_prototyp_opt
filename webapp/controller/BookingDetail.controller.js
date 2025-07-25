@@ -7,7 +7,7 @@ sap.ui.define([
 ], (Controller, JSONModel, Fragment, MessageToast, MessageBox) => {
     "use strict";
 
-    return Controller.extend("at.hb.makrancz.procodeappopt.controller.Detail", {
+    return Controller.extend("at.hb.makrancz.procodeappopt.controller.BookingDetail", {
 
         aForm: {},
 
@@ -17,20 +17,21 @@ sap.ui.define([
                 editMode: false
             });
             this.getView().setModel(this._oModel, "ui");
-            this.getRouter().getRoute("Detail").attachPatternMatched(this._onPatternMatched, this);
+            this.getRouter().getRoute("BookingDetail").attachPatternMatched(this._onPatternMatched, this);
         },
 
         _onPatternMatched: function (oEvent) {
             let sTravelID = oEvent.getParameters().arguments.TravelID;
-            if (sTravelID !== "-") {
+            let sBookingID = oEvent.getParameters().arguments.BookingID;
+            if (sBookingID !== "-") {
                 this._oModel.setProperty("/createMode", false);
-                this.path = `/Travel('${sTravelID}')`;
+                this.path = `/Booking(TravelID='${sTravelID}',BookingID='${sBookingID}')`;
                 this.getView().bindElement(this.path);
                 this.loadFragment("Display");
             } else {
                 this._oModel.setProperty("/createMode", true);
-                this.oCreatedContext = this.getModel().createEntry("/Travel", {
-                    TravelID: "-"
+                this.oCreatedContext = this.getModel().createEntry(`Travel('${sTravelID}')/to_Booking`, {
+                    TravelID: sTravelID
                 });
                 this.getView().bindElement(this.oCreatedContext.getPath());
                 this.loadFragment("Edit");
@@ -38,12 +39,10 @@ sap.ui.define([
         },
 
         loadFragment: function (sFragment) {
-            this.getView().byId("ObjectPageLayout").removeAllSections();
-            this._addFormSync(sFragment + "Form").then(() => {
+            this.getView().byId("2ObjectPageLayout").removeAllSections();
+            this._addFormSync(sFragment + "Booking").then(() => {
                 if (!this._oModel.getProperty("/createMode")) {
-                    this._addFormSync(sFragment + "BookingTable").then(() => {
-                        this._registerForP13n("bookingTable");
-                    });
+                    this._addFormSync(sFragment + "SupplementTable");
                 }
             });
         },
@@ -58,11 +57,11 @@ sap.ui.define([
                     }).then(function (oForm) {
                         this.getView().addDependent(oForm);
                         this.aForm[sFragment] = oForm;
-                        this.getView().byId("ObjectPageLayout").addSection(oForm);
+                        this.getView().byId("2ObjectPageLayout").addSection(oForm);
                         resolve();
                     }.bind(this));
                 } else {
-                    this.getView().byId("ObjectPageLayout").addSection(this.aForm[sFragment]);
+                    this.getView().byId("2ObjectPageLayout").addSection(this.aForm[sFragment]);
                     resolve();
                 }
             });
@@ -78,8 +77,9 @@ sap.ui.define([
                 success: () => {
                     MessageToast.show("Successfully saved.");
                     if (this._oModel.getProperty("/createMode")) {
-                        this.getRouter().navTo("Detail", {
-                            TravelID: this.oCreatedContext.getObject().TravelID
+                        this.getRouter().navTo("BookingDetail", {
+                            TravelID: this.oCreatedContext.getObject().TravelID,
+                            BookingID: this.oCreatedContext.getObject().BookingID
                         });
                         this._oModel.setProperty("/createMode", false)
                         this.loadFragment("Display");
@@ -142,22 +142,7 @@ sap.ui.define([
             }
             oBindingInfo.parameters.custom.search = oEvent.getParameters().value;
             oList.bindItems(oBindingInfo);
-        },
-
-        onListItemPressed: function(oEvent){
-            let oObject = oEvent.getSource().getBindingContext().getObject();
-			this.getRouter().navTo("BookingDetail", {
-				TravelID: oObject.TravelID,
-				BookingID: oObject.BookingID
-			});
-        },
-
-        onCreateBooking: function(){
-            let oObject = this.getView().getElementBinding().getBoundContext().getObject();
-			this.getRouter().navTo("BookingDetail", {
-				TravelID: oObject.TravelID,
-				BookingID: "-"
-			});
         }
+        
     });
 });

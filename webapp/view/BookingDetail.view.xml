@@ -1,0 +1,33 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+		   xmlns="sap.uxap"
+		   xmlns:m="sap.m"
+		   controllerName="at.hb.makrancz.procodeappopt.controller.BookingDetail"
+		   height="100%">
+	<ObjectPageLayout id="2ObjectPageLayout" showFooter="{= ${ui>/createMode} || ${ui>/editMode} }"
+		showTitleInHeaderContent="true">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle id="2_IDGenObjectPageDynamicHeaderTitle1">
+				<expandedHeading>
+					<m:Title id="2_IDGenTitle1" text="{= ${ui>/createMode} ? 'Unnamed Object' : ${TravelID} }" wrapping="true"/>
+				</expandedHeading>
+
+				<snappedHeading>
+					<m:FlexBox id="2_IDGenFlexBox1" fitContainer="true" alignItems="Center">
+						<m:Title id="2_IDGenTitle2" text="{= ${ui>/createMode} ? 'Unnamed Object' : ${TravelID} }" wrapping="true" />
+					</m:FlexBox>
+				</snappedHeading>
+
+				<actions>
+					<m:Button id="2_IDGenButton6" text="Edit" type="Emphasized" press="onEdit" visible="{= !${ui>/createMode} &amp;&amp; !${ui>/editMode} }"/>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+		<footer>
+			<m:OverflowToolbar id="2_IDGenOverflowToolbar2">
+				<m:ToolbarSpacer id="2_IDGenToolbarSpacer3"/>
+				<m:Button id="2_IDGenButton11" text="Save" type="Emphasized" press="onSave" />
+				<m:Button id="2_IDGenButton12" text="Cancel" type="Transparent" press="onCancel"/>
+			</m:OverflowToolbar>
+		</footer>
+	</ObjectPageLayout>
+</mvc:View>

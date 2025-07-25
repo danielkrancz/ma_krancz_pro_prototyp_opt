@@ -1,38 +1,46 @@
 <core:FragmentDefinition
-	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns="sap.uxap"
 	xmlns:m="sap.m"
     xmlns:form="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
-<form:SimpleForm editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="5">
-								<m:Label text="{/#TravelType/TravelID/@sap:label}"/>
-								<m:Text text="{= ${ui>/createMode} ? '-' : ${TravelID} }"/>
+		<ObjectPageSection id="_IDGenObjectPageSection2" titleUppercase="false" title="Travel">
+                <subSections>
+                    <ObjectPageSubSection id="travelDetailSubSection2" titleUppercase="false">
+                        <blocks>
+<form:SimpleForm id="_IDGenSimpleForm" editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="5">
+								<m:Label id="_IDGenLabel" text="{/#TravelType/TravelID/@sap:label}"/>
+								<m:Text id="_IDGenText15" text="{= ${ui>/createMode} ? '-' : ${TravelID} }"/>
 
-								<m:Label text="{/#TravelType/AgencyID/@sap:label}"/>
-								<m:Input required="true" value="{AgencyID}"/>
+								<m:Label id="_IDGenLabel1" text="{/#TravelType/AgencyID/@sap:label}"/>
+								<m:Input id="_IDGenInput" required="true" value="{AgencyID}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Agency', false, false)"/>
 
-								<m:Label text="{/#TravelType/CustomerID/@sap:label}"/>
-								<m:Input required="true" value="{CustomerID}"/>
+								<m:Label id="_IDGenLabel2" text="{/#TravelType/CustomerID/@sap:label}"/>
+								<m:Input id="_IDGenInput1" required="true" value="{CustomerID}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Customer', false, false)"/>
 
-								<m:Label text="{/#TravelType/BeginDate/@sap:label}"/>
-								<m:DatePicker required="true" value="{ path: 'BeginDate', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { UTC:true }}"/>
+								<m:Label id="_IDGenLabel3" text="{/#TravelType/BeginDate/@sap:label}"/>
+								<m:DatePicker id="_IDGenDatePicker" required="true" value="{ path: 'BeginDate', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { UTC:true }}"/>
 
-								<m:Label text="{/#TravelType/EndDate/@sap:label}"/>
-								<m:DatePicker required="true" value="{ path: 'EndDate', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { UTC:true }}"/>
+								<m:Label id="_IDGenLabel4" text="{/#TravelType/EndDate/@sap:label}"/>
+								<m:DatePicker id="_IDGenDatePicker1" required="true" value="{ path: 'EndDate', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { UTC:true }}"/>
 
-								<m:Label text="{/#TravelType/BookingFee/@sap:label}"/>
-								<m:Input required="true" value="{ path: 'BookingFee', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } }" />
-								<m:Input value="{CurrencyCode}"/>
+								<m:Label id="_IDGenLabel5" text="{/#TravelType/BookingFee/@sap:label}"/>
+								<m:Input id="_IDGenInput2" required="true" value="{ path: 'BookingFee', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } }" />
+								<m:Input id="_IDGenInput3" value="{CurrencyCode}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Currency', false, false)"/>
 
-								<m:Label text="{/#TravelType/TotalPrice/@sap:label}"/>
-								<m:Text text="{ path: 'TotalPrice', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } }" visible="{= !${ui>/createMode} }"/>
-								<m:Text text="-" visible="{ui>/createMode}"/>
+								<m:Label id="_IDGenLabel6" text="{/#TravelType/TotalPrice/@sap:label}"/>
+								<m:Text id="_IDGenText16" text="{ path: 'TotalPrice', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } } {CurrencyCode}" visible="{= !${ui>/createMode} }"/>
+								<m:Text id="_IDGenText17" text="-" visible="{ui>/createMode}"/>
 
-								<m:Label text="{/#TravelType/OverallStatus/@sap:label}"/>
-								<m:ComboBox required="true" selectedKey="{OverallStatus}" items="{ path: '/OverallStatusVH', templateShareable: true }">
-									<core:Item key="{OverallStatus}" text="{OverallStatus_Text}"/>
+								<m:Label id="_IDGenLabel7" text="{/#TravelType/OverallStatus/@sap:label}"/>
+								<m:ComboBox id="_IDGenComboBox1" required="true" selectedKey="{OverallStatus}" items="{ path: '/OverallStatusVH', templateShareable: true }">
+									<core:Item id="_IDGenItem1" key="{OverallStatus}" text="{OverallStatus_Text}"/>
 								</m:ComboBox>
 
-								<m:Label text="{/#TravelType/Description/@sap:label}"/>
-								<m:TextArea text="{Description}" rows="3"/>
+								<m:Label id="_IDGenLabel8" text="{/#TravelType/Description/@sap:label}"/>
+								<m:TextArea id="_IDGenTextArea" value="{Description}" rows="3"/>
 							</form:SimpleForm>
+							</blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
                             </core:FragmentDefinition>

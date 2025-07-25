@@ -1,0 +1,102 @@
+<core:FragmentDefinition
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:plugins="sap.m.plugins"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+	xmlns:dnd="sap.ui.core.dnd"
+    xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+            <ObjectPageSection id="1_IDGenObjectPageSection1" titleUppercase="false" title="Booking" visible="{= !${ui>/createMode}}">
+                <subSections>
+                    <ObjectPageSubSection id="1_IDGenObjectPageSubSection" titleUppercase="false">
+                        <blocks>
+<m:Table id="1bookingTable" items="{ path: 'to_Booking', sorter: [ { path: 'BookingID' } ] }" growingScrollToLoad="true" fixedLayout="Strict" growing="true" sticky="ColumnHeaders,HeaderToolbar">
+								<m:dependents>
+									<plugins:ColumnResizer columnResize="onColumnResize"/>
+									<columnmenu:Menu id="1menu" beforeOpen="beforeOpenColumnMenu" showTableSettingsButton="true" tableSettingsPressed="openPersoDialog">
+										<columnmenu:QuickSort change="onSort">
+											<columnmenu:items>
+												<columnmenu:QuickSortItem></columnmenu:QuickSortItem>
+											</columnmenu:items>
+										</columnmenu:QuickSort>
+										<columnmenu:QuickGroup change="onGroup">
+											<columnmenu:items>
+												<columnmenu:QuickGroupItem></columnmenu:QuickGroupItem>
+											</columnmenu:items>
+										</columnmenu:QuickGroup>
+									</columnmenu:Menu>
+								</m:dependents>
+
+								<m:dragDropConfig>
+									<dnd:DragDropInfo sourceAggregation="columns" targetAggregation="columns" dropPosition="Between" drop="onColumnMove"/>
+								</m:dragDropConfig>
+
+								<m:noData>
+									<m:IllustratedMessage/>
+								</m:noData>
+								<m:headerToolbar>
+									<m:OverflowToolbar>
+										<m:Title text="Bookings"/>
+										<m:ToolbarSpacer/>
+										<m:SearchField width="15em" change="onSearchChanged"/>
+										<m:Button icon="sap-icon://action-settings" press="openPersoDialog"/>
+										<m:Button icon="sap-icon://excel-attachment" press="onExport($event, 'bookingTable')"/>
+									</m:OverflowToolbar>
+								</m:headerToolbar>
+								<m:columns>
+									<m:Column id="1bookingnumber" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingType/BookingID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="1bookingdate" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingType/BookingDate/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="1customerid" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingType/CustomerID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="1airlineid" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingType/CarrierID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="1flightnumber" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingType/ConnectionID/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="1flightdate" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingType/FlightDate/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="1flightprice" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingType/FlightPrice/@sap:label}"/>
+									</m:Column>
+
+									<m:Column id="1status" headerMenu="menu" demandPopin="true" importance="High">
+										<m:Text text="{/#BookingType/BookingStatusText/@sap:label}"/>
+									</m:Column>
+									
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem>
+										<m:Text text="{BookingID}"/>
+										<m:Text text="{ path: 'BookingDate', type: 'sap.ui.model.type.Date'}"/>
+										<m:Text text="{CustomerName} ({CustomerID})"/>
+										<m:Input value="{CarrierID}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Flight', false, false)"/>
+										<m:Input value="{ConnectionID}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Flight', false, false)"/>
+										<m:DatePicker dateValue="{ path: 'FlightDate', type: 'sap.ui.model.odata.type.Date', formatOptions: { UTC: true } }"/>
+										<m:HBox>
+											<m:Input value="{FlightPrice}"/>
+											<m:Input value="{CurrencyCode}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Currency', false, false)"/>
+										</m:HBox>
+										<m:ComboBox required="true" selectedKey="{BookingStatus}" items="{ path: '/BookingStatusVH', templateShareable: true }">
+											<core:Item key="{BookingStatus}" text="{BookingStatus_Text}"/>
+										</m:ComboBox>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+							</blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
+</core:FragmentDefinition>						

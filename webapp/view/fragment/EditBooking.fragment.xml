@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+    xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+<ObjectPageSection titleUppercase="false" title="Booking">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <form:SimpleForm editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="5">
+								<m:Label text="{/#BookingType/BookingID/@sap:label}"/>
+								<m:Text text="-"/>
+
+                                <m:Label text="{/#BookingType/BookingDate/@sap:label}"/>
+								<m:DatePicker required="true" dateValue="{ path: 'BookingDate', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { UTC:true } }"/>
+
+                                <m:Label text="{/#BookingType/CustomerID/@sap:label}"/>
+								<m:Input required="true" value="{CustomerID}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Customer', false, false)"/>
+
+								<m:Label text="{/#BookingType/CarrierID/@sap:label}"/>
+								<m:Input required="true" value="{CarrierID}" valueHelpRequest=".showValueHelpDialog($event, 'Flight', false, false)" showValueHelp="true"/>
+
+								<m:Label text="{/#BookingType/ConnectionID/@sap:label}"/>
+								<m:Input required="true" value="{ConnectionID}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Flight', false, false)"/>
+
+								<m:Label text="{/#BookingType/FlightDate/@sap:label}"/>
+								<m:DatePicker required="true" dateValue="{ path: 'FlightDate', type: 'sap.ui.model.odata.type.DateTime', formatOptions: { UTC:true }}"/>
+
+								<m:Label text="{/#BookingType/FlightPrice/@sap:label}"/>
+								<m:Input value="{ path: 'FlightPrice', type: 'sap.ui.model.odata.type.Decimal', formatOptions: { scale: 2 } }" />
+								<m:Input value="{CurrencyCode}" showValueHelp="true" valueHelpRequest=".showValueHelpDialog($event, 'Currency', false, false)"/>
+
+								<m:Label text="{/#BookingType/BookingStatus/@sap:label}"/>
+								<m:ComboBox required="true" selectedKey="{BookingStatus}" items="{ path: '/BookingStatusVH', templateShareable: true }">
+									<core:Item key="{BookingStatus}" text="{BookingStatus_Text}"/>
+								</m:ComboBox>
+
+							</form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
+        </core:FragmentDefinition>
