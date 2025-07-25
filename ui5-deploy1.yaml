@@ -4,19 +4,22 @@ specVersion: "3.1"
 metadata:
   name: at.hb.makrancz.procodeappopt
 type: application
-resources:
-  configuration:
-    propertiesFileSourceEncoding: UTF-8
 builder:
   resources:
     excludes:
       - /test/**
       - /localService/**
   customTasks:
-    - name: ui5-task-zipper
+    - name: deploy-to-abap
       afterTask: generateCachebusterInfo
       configuration:
-        archiveName: athbmakranczprocodeappopt
-        relativePaths: true
-        additionalFiles:
-          - xs-app.json
+        target:
+          destination: S4D
+          url: https://s4dev.clouddna.at:8001/
+          client: '010'
+        app:
+          name: ZMAKRANCZLOWOPT
+          package: ZMAKRANCZ
+          transport: S4DK900690
+        exclude:
+          - /test/
